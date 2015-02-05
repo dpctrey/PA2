@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>TicTacToe.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">tic-tac-toe</a> &gt; <a href="index.source.html" class="el_package">edu.jsu.mcis</a> &gt; <span class="el_source">TicTacToe.java</span></div><h1>TicTacToe.java</h1><pre class="source lang-java linenums">package edu.jsu.mcis;
+
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle;
+
+public class TicTacToe extends JFrame 
+{
+<span class="pc" id="L12">    public enum Mark {EMPTY, X, O, TIE}</span>
+<span class="fc" id="L13">    private boolean xTurn = true;</span>
+<span class="fc" id="L14">    public final int time = 1000;</span>
+    private static final long serialVersionUID = 1L;
+<span class="fc" id="L16">    public final int size = 3;</span>
+<span class="fc" id="L17">    private final JButton[][] fButton = new JButton[size][size];</span>
+<span class="fc" id="L18">    private final Mark[][] gBoard = new Mark[size][size];</span>
+    
+    public TicTacToe() 
+<span class="fc" id="L21">    {</span>
+<span class="fc" id="L22">        initComponents();</span>
+<span class="fc" id="L23">    }</span>
+	
+    public void mark(int r, int c)
+    {
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (gBoard[r][c] == Mark.EMPTY)</span>
+		{
+<span class="fc bfc" id="L29" title="All 2 branches covered.">			if (xTurn == true)</span>
+			{
+				
+<span class="fc" id="L32">				fButton[r][c].setLabel(&quot;X&quot;);</span>
+<span class="fc" id="L33">				fButton[r][c].setText(&quot;X&quot;);</span>
+<span class="fc" id="L34">				gBoard[r][c] = Mark.X;</span>
+<span class="fc" id="L35">				xTurn = false;</span>
+<span class="fc" id="L36">				Mark t = isWinner(Mark.X);</span>
+<span class="fc" id="L37">			}</span>
+			else 
+			{
+				
+<span class="fc" id="L41">				int timeTwo = 1000;</span>
+<span class="fc" id="L42">				fButton[r][c].setLabel(&quot;O&quot;);</span>
+<span class="fc" id="L43">				fButton[r][c].setText(&quot;O&quot;);</span>
+<span class="fc" id="L44">				gBoard[r][c] = Mark.O;</span>
+<span class="fc" id="L45">				xTurn = true;</span>
+<span class="fc" id="L46">				Mark k = isWinner(Mark.O);</span>
+			}
+		}
+<span class="fc" id="L49">	}</span>
+	
+    private void initComponents() 
+    {
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		for (int r = 0; r &lt; size; r++)</span>
+		{
+<span class="fc bfc" id="L55" title="All 2 branches covered.">			for(int c = 0; c &lt; size; c++)</span>
+			{
+<span class="fc" id="L57">				fButton[r][c] = new JButton();</span>
+<span class="fc" id="L58">				fButton[r][c].setName(&quot;Location&quot; + r + c);</span>
+<span class="fc" id="L59">                gBoard[r][c] = Mark.EMPTY;</span>
+			}
+		}
+		
+<span class="fc" id="L63">        fButton[0][0].addActionListener(new ActionListener() </span>
+<span class="fc" id="L64">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L68">                mark(0, 0);</span>
+<span class="nc" id="L69">            }</span>
+        });
+<span class="fc" id="L71">        fButton[0][1].addActionListener(new ActionListener() </span>
+<span class="fc" id="L72">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L76">                mark(0,1);</span>
+<span class="nc" id="L77">            }</span>
+        });
+<span class="fc" id="L79">        fButton[0][2].addActionListener(new ActionListener() </span>
+<span class="fc" id="L80">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L84">                mark(0,2);</span>
+<span class="nc" id="L85">            }</span>
+        });
+<span class="fc" id="L87">        fButton[1][0].addActionListener(new ActionListener() </span>
+<span class="fc" id="L88">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L92">                mark(1,0);</span>
+<span class="nc" id="L93">            }</span>
+        });
+<span class="fc" id="L95">        fButton[1][1].addActionListener(new ActionListener() </span>
+<span class="fc" id="L96">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L100">                mark(1,1);</span>
+<span class="nc" id="L101">            }</span>
+        });
+<span class="fc" id="L103">        fButton[1][2].addActionListener(new ActionListener() </span>
+<span class="fc" id="L104">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L108">                mark(1,2);</span>
+<span class="nc" id="L109">            }</span>
+        });
+<span class="fc" id="L111">         fButton[2][0].addActionListener(new ActionListener() </span>
+<span class="fc" id="L112">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L116">                mark(2,0);</span>
+<span class="nc" id="L117">            }</span>
+        });
+<span class="fc" id="L119">        fButton[2][1].addActionListener(new ActionListener() </span>
+<span class="fc" id="L120">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L124">				mark(2,1);</span>
+<span class="nc" id="L125">            }</span>
+        });
+<span class="fc" id="L127">        fButton[2][2].addActionListener(new ActionListener() </span>
+<span class="fc" id="L128">        {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) 
+            {
+<span class="nc" id="L132">                mark(2,2);</span>
+<span class="nc" id="L133">            }</span>
+        });
+<span class="fc" id="L135">        pack();</span>
+<span class="fc" id="L136">        setLocationRelativeTo(getOwner());</span>
+<span class="fc" id="L137">	}</span>
+    public Mark isWinner(Mark m)
+	{
+<span class="fc" id="L140">		boolean hasWon = false;</span>
+<span class="pc bpc" id="L141" title="1 of 48 branches missed.">		if (((gBoard[0][0] == m) &amp;&amp; (gBoard[0][1] == m)</span>
+			&amp;&amp; (gBoard[0][2] == m)) || ((gBoard[0][0] == m) &amp;&amp; (gBoard[1][1] == m)
+			&amp;&amp; (gBoard[2][2] == m)) || ((gBoard[0][0] == m) &amp;&amp; (gBoard[1][0] == m)
+			&amp;&amp; (gBoard[2][0] == m)) || ((gBoard[0][2] == m) &amp;&amp; (gBoard[1][1] == m)
+			&amp;&amp; (gBoard[2][0] == m)) || ((gBoard[1][0] == m) &amp;&amp; (gBoard[1][1] == m)
+			&amp;&amp; (gBoard[1][2] == m)) || ((gBoard[0][1] == m) &amp;&amp; (gBoard[1][1] == m)
+			&amp;&amp; (gBoard[2][1] == m)) || ((gBoard[2][0] == m) &amp;&amp; (gBoard[2][1] == m)
+			&amp;&amp; (gBoard[2][2] == m)) || ((gBoard[0][2] == m) &amp;&amp; (gBoard[2][2] == m)
+			&amp;&amp; (gBoard[2][2] == m)))
+		{	            
+<span class="fc" id="L151">			hasWon = true;	</span>
+		}
+<span class="fc bfc" id="L153" title="All 2 branches covered.">		if (isTie() == true)</span>
+		{
+<span class="fc" id="L155">			m = Mark.TIE;</span>
+<span class="fc" id="L156">			String r = markString(m);</span>
+<span class="fc" id="L157">			ActionListener aListen = new ActionListener() </span>
+<span class="fc" id="L158">			{</span>
+				@Override
+				public void actionPerformed(ActionEvent evt) 
+				{
+<span class="nc" id="L162">					JOptionPane.showMessageDialog(null, &quot;The winner is &quot; + r , &quot;Game Over&quot;, JOptionPane.PLAIN_MESSAGE);</span>
+<span class="nc" id="L163">					resetBoard();</span>
+<span class="nc" id="L164">				}</span>
+			};
+<span class="fc" id="L166">			Timer myTimer = new Timer(time, aListen);</span>
+<span class="fc" id="L167">			myTimer.setRepeats(false);</span>
+<span class="fc" id="L168">			myTimer.start();	</span>
+		}
+<span class="fc bfc" id="L170" title="All 2 branches covered.">		if (hasWon)</span>
+		{
+<span class="fc" id="L172">			String t = markString(m);</span>
+<span class="fc" id="L173">			ActionListener aListen = new ActionListener() </span>
+<span class="fc" id="L174">			{</span>
+				@Override
+				public void actionPerformed(ActionEvent evt) 
+				{
+<span class="nc" id="L178">					JOptionPane.showMessageDialog(null, &quot;The winner is &quot; + t , &quot;Game Over&quot;, JOptionPane.PLAIN_MESSAGE);</span>
+<span class="nc" id="L179">					resetBoard();</span>
+<span class="nc" id="L180">				}</span>
+			};
+<span class="fc" id="L182">			Timer myTimer = new Timer(time, aListen);</span>
+<span class="fc" id="L183">			myTimer.setRepeats(false);</span>
+<span class="fc" id="L184">			myTimer.start();</span>
+<span class="fc" id="L185">		}</span>
+		else
+		{	            
+<span class="fc" id="L188">			m = Mark.EMPTY;</span>
+		}
+<span class="fc" id="L190">		return m;</span>
+	}
+	 
+    public void resetBoard()
+	{
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        for (int r = 0; r &lt; size; r++)</span>
+		{
+<span class="fc bfc" id="L197" title="All 2 branches covered.">			for (int c = 0; c &lt; size; c++)</span>
+			{
+<span class="fc" id="L199">				gBoard[r][c] = Mark.EMPTY;</span>
+<span class="fc" id="L200">				fButton[r][c].setText(&quot;&quot;);</span>
+<span class="fc" id="L201">				xTurn = true;</span>
+			}
+		}
+<span class="fc" id="L204">    }</span>
+    
+    public boolean isTie()
+	{
+<span class="fc bfc" id="L208" title="All 2 branches covered.">        for (int r = 0; r &lt; size; r++)</span>
+		{
+<span class="fc bfc" id="L210" title="All 2 branches covered.">            for (int c = 0; c &lt; size; c++)</span>
+			{
+<span class="fc bfc" id="L212" title="All 2 branches covered.">                if (gBoard[r][c] == Mark.EMPTY)</span>
+				{
+<span class="fc" id="L214">                    return false;</span>
+                }
+            }
+        }
+<span class="fc" id="L218">        return true;</span>
+    }
+	
+    public String markString(Mark m)
+	{
+<span class="fc bfc" id="L223" title="All 2 branches covered.">        if (m == Mark.X)</span>
+		{
+<span class="fc" id="L225">            return &quot;X&quot;;</span>
+        }
+<span class="fc bfc" id="L227" title="All 2 branches covered.">        else if (m == Mark.O)</span>
+		{
+<span class="fc" id="L229">            return &quot;O&quot;;</span>
+        }
+<span class="fc bfc" id="L231" title="All 2 branches covered.">        else if (m == Mark.TIE)</span>
+		{
+<span class="fc" id="L233">            return &quot;TIE&quot;;</span>
+        }
+<span class="fc" id="L235">        return &quot;Empty&quot;;</span>
+    }
+	
+    public static void main(String[] args) 
+    {
+<span class="nc" id="L240">        JFrame gameFrame = new JFrame(&quot;Tic Tac Toe&quot;);</span>
+<span class="nc" id="L241">        gameFrame.setLayout(new GridLayout(3,3));</span>
+<span class="nc" id="L242">		gameFrame.setSize(400,400);</span>
+<span class="nc" id="L243">        gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L244">        TicTacToe ticFrame = new TicTacToe();</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        for (int i = 0; i &lt; 3; i++)</span>
+		{
+<span class="nc bnc" id="L247" title="All 2 branches missed.">            for (int j = 0; j &lt; 3; j++)</span>
+			{
+<span class="nc" id="L249">                gameFrame.add(ticFrame.fButton[i][j]);</span>
+            }
+        }
+<span class="nc" id="L252">        gameFrame.pack();</span>
+<span class="nc" id="L253">        gameFrame.setVisible(true);</span>
+<span class="nc" id="L254">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

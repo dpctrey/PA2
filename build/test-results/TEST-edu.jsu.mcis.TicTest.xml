@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.jsu.mcis.TicTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2015-02-05T02:46:56" hostname="WINDOWS-LJ5NMKH" time="0.606">
+  <properties/>
+  <testcase name="testmarkString" classname="edu.jsu.mcis.TicTest" time="0.544"/>
+  <testcase name="testTie" classname="edu.jsu.mcis.TicTest" time="0.016"/>
+  <testcase name="testAllWins" classname="edu.jsu.mcis.TicTest" time="0.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
